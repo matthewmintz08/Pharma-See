@@ -173,6 +173,15 @@
       incurred by, or claims asserted against, such Contributor by reason
       of your accepting any such warranty or additional liability.
 
+   Commons Clause License Condition, v1.0
+
+      The Software is provided to you subject to the condition that you may not sell,
+      sublicense, or otherwise make the Software available for commercial purposes. 
+      The term "commercial purposes" means any activity that is intended to or does result in commercial 
+      advantage or monetary compensation. This includes, but is not limited to, using the Software as part 
+      of a service or product that is sold or licensed for profit.
+
+
    END OF TERMS AND CONDITIONS
 
    APPENDIX: How to apply the Apache License to your work.
@@ -186,7 +195,7 @@
       same "printed page" as the copyright notice for easier
       identification within third-party archives.
 
-   Copyright [yyyy] [name of copyright owner]
+   Copyright [2024] [Matthew Mintz]
 
    Licensed under the Apache License, Version 2.0 (the "License");
    you may not use this file except in compliance with the License.
