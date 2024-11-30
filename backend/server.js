@@ -19,6 +19,10 @@ const Medication = require('./models/Medication');
 const Pharmacy = require('./models/Pharmacy');
 const User = require('./models/User');
 
+const userRoutes = require('./routes/userRoutes');
+
+app.use('/api/users', userRoutes);
+
 app.get('/', (req, res) => {
     res.send('welcome to pharma-see API');
 });
