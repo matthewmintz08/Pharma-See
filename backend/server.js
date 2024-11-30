@@ -15,6 +15,10 @@ mongoose.connect(process.env.MONGO_URL)
 .then(()=> console.log('mongo-db connected'))
 .catch(err => console.log(err));
 
+const Medication = require('./models/Medication');
+const Pharmacy = require('./models/Pharmacy');
+const User = require('./models/User');
+
 app.get('/', (req, res) => {
     res.send('welcome to pharma-see API');
 });
