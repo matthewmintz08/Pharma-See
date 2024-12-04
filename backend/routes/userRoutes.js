@@ -25,8 +25,21 @@ router.post('/', async (req, res) =>{
 });
 
 //get a user by userID
-router.get('/', async (req, res) => {
-})
+router.get('/:id', async (req, res) => {
+    try{
+        console.log(req.params.id)
+        const foundUser = await User.findById(req.params.id); // search for user
+
+        if(!foundUser) {
+            return res.status(404).json({message: 'User not found'});
+        }
+
+        res.json(foundUser); // return user
+    } catch (err) {
+        res.status(500).json({message: err.message});
+    }
+});
+
 
 //export router
 module.exports = router;
