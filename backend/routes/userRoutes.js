@@ -1,6 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const User = require('../models/User');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+require('dotenv').config();
 
 //get All users
 router.get('/', async (req, res) => {
@@ -12,7 +15,7 @@ router.get('/', async (req, res) => {
     }
 });
 
-// POST a new user
+// Register a new user
 router.post('/', async (req, res) =>{
     const userInfo = new User(req.body);
 
@@ -21,6 +24,37 @@ router.post('/', async (req, res) =>{
         res.status(201).json(newUser);
     } catch (err) {
         res.status(400).json({message: err.message});
+    }
+});
+
+// User log in
+router.post('/login', async (req, res) => {
+    try{
+        // Get email and Password from login fields
+        const{email, password} = req.body;
+
+        // Find existing user with given email
+        const user = await User.findOne({email});
+        if(!user) { 
+            return res.status(400).json({message: "Invalid email or password"});
+        }
+
+        // Compare found users password with encrypted password
+        const isMatch = await bcrypt.compare(password, user.password);
+        if(!isMatch) {
+            return res.status(400).json({message: "Invalid email or password"});
+        }
+
+        // Generate JWT
+        const token = jwt.sign(
+            {id: user.id, email: user.email},
+            process.env.JWT_SCERET,
+            {expiresIn: '1h'}
+        );
+
+        res.json({ token, user:{ id: user._id, name: user.name, email: user.email} });
+    } catch(err) {
+        res.status(500).json({ message: 'Server error'});
     }
 });
 
